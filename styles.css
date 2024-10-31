@@ -85,6 +85,10 @@ body {
 
 .page-header__nav-link:hover,
 .page-header__nav-link:active {
+  color: #bc3324;
+}
+
+.this-page {
   color: #bc3324
 }
 
@@ -248,7 +252,7 @@ body {
 }
 
 .left-side {
-  object-position: 10%;
+  object-position: 15%;
 }
 
 .bottom-side {
