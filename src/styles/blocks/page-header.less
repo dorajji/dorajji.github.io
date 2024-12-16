@@ -12,6 +12,9 @@
     @media @bw1660 {
         height: 111px;
       }
+    @media @bw768 {
+        height: 70px;
+    }
     
       &::before {
         content: "";
@@ -28,10 +31,6 @@
             backdrop-filter: blur(20px);
             }
     }
-    
-    @media @bw768 {
-        height: 70px;
-      }
 
     &__logo{
         flex-shrink: 0;
@@ -47,6 +46,10 @@
         @media @bw768 {
             width: 96px;
             height: 70px;
+        }
+        @media @bw650 {
+          width: 152px;
+          height: 111px;
         }
     }
 

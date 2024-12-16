@@ -461,10 +461,27 @@ textarea:focus::placeholder {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: rgba(222, 222, 222, 0.5);
-  -webkit-backdrop-filter: blur(20px);
-          backdrop-filter: blur(20px);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   z-index: 100;
+}
+.page-header::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(222, 222, 222, 0.98);
+}
+@supports ((-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))) {
+  .page-header::before {
+    background-color: rgba(222, 222, 222, 0.7);
+    -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+  }
 }
 .page-header__logo {
   -ms-flex-negative: 0;
@@ -483,16 +500,17 @@ textarea:focus::placeholder {
           box-sizing: border-box;
   width: 100%;
   max-width: 1414px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  z-index: 1;
 }
 .page-header__nav {
   -webkit-box-sizing: border-box;
@@ -595,11 +613,34 @@ textarea:focus::placeholder {
 .page-header__nav-toggle::after {
   top: 25px;
 }
+.page-header__nav-user {
+  display: none;
+}
+.page-header__nav-user-link {
+  margin-right: 25px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+.page-header__nav-logout {
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+}
 .page-footer {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
   background-color: blueviolet;
+}
+.container {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  max-width: 1414px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 .is-hidden {
   position: absolute !important;
@@ -1101,8 +1142,7 @@ textarea:focus::placeholder {
           box-sizing: border-box;
   width: 100%;
   max-width: 1414px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
 }
@@ -1334,22 +1374,67 @@ textarea:focus::placeholder {
   body {
     padding-top: 111px;
   }
+  .section-title {
+    max-width: 604px;
+  }
+  .section-title {
+    margin-bottom: 130px;
+  }
+  .event-card__title {
+    margin: 0 0 10px;
+  }
+  .listing {
+    width: calc(33.3333% - 40px);
+    margin: 0 20px 100px;
+  }
+  .listing__events-list {
+    margin: 0 -20px -100px;
+  }
   .page-header {
     height: 111px;
   }
   .page-header__logo {
+    width: 152px;
     height: 111px;
-    width: 152;
   }
   .page-header__right-block {
-    height: 152px;
+    width: 152px;
   }
   .width_624 {
     max-width: 604px;
   }
 }
 @media (max-width: 1339px) {
+  .section-title {
+    max-width: 566px;
+  }
+  .section-title {
+    min-height: 52px;
+    margin-bottom: 100px;
+    padding: 11px 40px;
+    font-size: 24px;
+  }
+  .event-card__title {
+    min-height: 54px;
+    font-size: 20px;
+    line-height: 27px;
+  }
+  .listing {
+    width: calc(33.3333% - 30px);
+    margin: 0 15px 100px;
+  }
+  .listing__events-list {
+    margin: 0 -15px -100px;
+  }
+  .reserve {
+    gap: 65px 6.5%;
+    grid-template-columns: 340px calc(93.5% - 340px);
+  }
   .page-header__container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .container {
     padding-left: 30px;
     padding-right: 30px;
   }
@@ -1362,6 +1447,26 @@ textarea:focus::placeholder {
   }
 }
 @media (max-width: 1019px) {
+  .event-card__description {
+    font-size: 14px;
+    line-height: 19px;
+  }
+  .listing {
+    width: calc(50% - 30px);
+    max-width: 405px;
+    margin: 0 15px 80px;
+  }
+  .listing__events-list {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin: 0 -15px -80px;
+  }
+  .reserve {
+    gap: 60px;
+    grid-template-columns: auto 390px;
+    grid-template-areas: "scheme scheme" "checks legend" "checks order";
+  }
   .page-header__nav {
     position: absolute;
     left: 0;
@@ -1381,12 +1486,9 @@ textarea:focus::placeholder {
     transition: -webkit-transform 0.4s;
     transition: transform 0.4s;
     transition: transform 0.4s, -webkit-transform 0.4s;
-    /*
-            закончив верстку шапки,
-            раскомментируем следующее свойство,
-            чтобы скрыть наше меню:
+    -webkit-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
             transform: translateX(-100%);
-            */
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -1435,10 +1537,40 @@ textarea:focus::placeholder {
     border: none;
     background: none;
   }
+  .page-header__nav-user {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-top: 20px;
+  }
 }
 @media (max-width: 767px) {
   body {
     padding-top: 70px;
+  }
+  .section-title {
+    min-height: 42px;
+    margin-bottom: 80px;
+    padding: 11px 20px;
+    font-size: 20px;
+  }
+  .event-card__title {
+    min-height: 44px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .listing {
+    margin: 0 10px 80px;
+  }
+  .listing__events-list {
+    margin: 0 -10px -80px;
+  }
+  .reserve {
+    grid-template-columns: 100%;
+    grid-template-areas: "scheme" "legend" "checks" "order";
   }
   .page-header {
     height: 70px;
@@ -1451,11 +1583,36 @@ textarea:focus::placeholder {
     padding-left: 20px;
     padding-right: 20px;
   }
+  .page-header__nav {
+    padding: 150px 20px 30px;
+  }
   .page-header__nav-toggle {
     margin-left: 5px;
+  }
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .article__container {
     padding-left: 20px;
     padding-right: 20px;
+  }
+}
+@media (max-width: 649px) {
+  .listing {
+    width: 100%;
+    margin: 0 0 60px;
+  }
+  .listing__events-list {
+    margin: 0 0 -60px;
+  }
+  .page-header__logo {
+    width: 152px;
+    height: 111px;
+  }
+}
+@media (max-width: 599px) {
+  .section-title {
+    font-size: 16px;
   }
 }
