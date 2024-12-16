@@ -495,6 +495,8 @@ textarea:focus::placeholder {
           align-items: center;
 }
 .page-header__nav {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -563,6 +565,35 @@ textarea:focus::placeholder {
 .page-header__user-btn:hover {
   background-color: #1f1e1e;
   color: #ffffff;
+}
+.page-header__user-icon {
+  display: none;
+}
+.page-header__nav-toggle {
+  display: none;
+}
+.page-header__nav-toggle::before,
+.page-header__nav-toggle::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 19px;
+  left: 11px;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #1f1e1e;
+  -webkit-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+.page-header__nav-toggle::before {
+  top: 13px;
+  -webkit-box-shadow: 0 6px 0 #1f1e1e;
+          box-shadow: 0 6px 0 #1f1e1e;
+}
+.page-header__nav-toggle::after {
+  top: 25px;
 }
 .page-footer {
   -webkit-box-flex: 0;
@@ -1300,6 +1331,9 @@ textarea:focus::placeholder {
   font-weight: 700;
 }
 @media (max-width: 1659px) {
+  body {
+    padding-top: 111px;
+  }
   .page-header {
     height: 111px;
   }
@@ -1328,15 +1362,97 @@ textarea:focus::placeholder {
   }
 }
 @media (max-width: 1019px) {
+  .page-header__nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    padding: 211px 30px 30px;
+    background-color: rgba(222, 222, 222, 0.98);
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+    transition: transform 0.4s, -webkit-transform 0.4s;
+    /*
+            закончив верстку шапки,
+            раскомментируем следующее свойство,
+            чтобы скрыть наше меню:
+            transform: translateX(-100%);
+            */
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  @supports ((-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))) {
+    .page-header__nav {
+      background-color: rgba(222, 222, 222, 0.7);
+      -webkit-backdrop-filter: blur(20px);
+              backdrop-filter: blur(20px);
+    }
+  }
+  .page-header__nav-link {
+    margin: 0 0 40px;
+    font-size: 16px;
+    line-height: 22px;
+  }
   .page-header__right-block {
     width: auto;
     margin-left: auto;
   }
+  .page-header__user-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #1f1e1e;
+    font-size: 0;
+  }
+  .page-header__user-btn:hover {
+    background-color: transparent;
+  }
+  .page-header__user-icon {
+    display: block;
+    margin: auto;
+  }
+  .page-header__nav-toggle {
+    display: block;
+    position: relative;
+    right: -11px;
+    margin-left: 18px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+  }
 }
 @media (max-width: 767px) {
+  body {
+    padding-top: 70px;
+  }
+  .page-header {
+    height: 70px;
+  }
+  .page-header__logo {
+    width: 96px;
+    height: 70px;
+  }
   .page-header__container {
     padding-left: 20px;
     padding-right: 20px;
+  }
+  .page-header__nav-toggle {
+    margin-left: 5px;
   }
   .article__container {
     padding-left: 20px;
