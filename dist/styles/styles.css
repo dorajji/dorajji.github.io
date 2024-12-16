@@ -1606,10 +1606,6 @@ textarea:focus::placeholder {
   .listing__events-list {
     margin: 0 0 -60px;
   }
-  .page-header__logo {
-    width: 152px;
-    height: 111px;
-  }
 }
 @media (max-width: 599px) {
   .section-title {
